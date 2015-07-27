@@ -9,19 +9,26 @@
     "define": [ ]
   },
   "dependencies": {
-
+    "ProtocolBuffers": "2.4.1-*"
   },
+  "code": [
+    "../ProtocolBuffers/FrameworkPortability.cs"
+  ],
 
   "frameworks": {
 
     "dnx451": {
-
+      "frameworkAssemblies": {
+        "System.Xml": ""
+      }
     },
 
     "dnxcore50": {
       "dependencies": {
+        "System.Xml.ReaderWriter": "4.0.10-*",
         "System.ComponentModel.Annotations": "4.0.10-*",
-        "System.Linq.Queryable": "4.0.0-*"
+        "System.Linq.Queryable": "4.0.0-*",
+        "System.Xml.XmlSerializer": "4.0.10-*"
       }
     },
 
