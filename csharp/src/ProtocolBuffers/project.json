@@ -1,0 +1,29 @@
+﻿{
+  "version": "2.4.1-*",
+  "description": "Protocol Buffers are Google's data interchange format.",
+  "authors": [ "Protobuf Authors" ],
+  "tags": [ "" ],
+  "projectUrl": "https://developers.google.com/protocol-buffers/",
+  "licenseUrl": "https://github.com/google/protobuf/blob/master/LICENSE",
+  "compilationOptions": {
+    "define": [ ]
+  },
+  "dependencies": {
+
+  },
+
+  "frameworks": {
+
+    "dnx451": {
+
+    },
+
+    "dnxcore50": {
+      "dependencies": {
+        "System.ComponentModel.Annotations": "4.0.10-*",
+        "System.Linq.Queryable": "4.0.0-*"
+      }
+    }
+
+  }
+}

@@ -130,7 +130,7 @@ namespace Google.ProtocolBuffers
             int[] array;
             try
             {
-#if CLIENTPROFILE
+#if CLIENTPROFILE || DNXCORE50
                 // It will actually be a T[], but the CLR will let us convert.
                 array = (int[])Enum.GetValues(typeof(T));
 #else

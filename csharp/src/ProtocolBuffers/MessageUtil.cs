@@ -60,7 +60,12 @@ namespace Google.ProtocolBuffers
             {
                 throw new ArgumentNullException("type", "No type specified.");
             }
+
+#if DNXCORE50
+            if (type.GetTypeInfo().IsAbstract || type.GetTypeInfo().IsGenericTypeDefinition)
+#else
             if (type.IsAbstract || type.IsGenericTypeDefinition)
+#endif
             {
                 throw new ArgumentException("Unable to get a default message for an abstract or generic type (" +
                                             type.FullName + ")");

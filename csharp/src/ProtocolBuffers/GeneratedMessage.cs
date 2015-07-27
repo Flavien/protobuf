@@ -38,7 +38,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using Google.ProtocolBuffers.Collections;
 using Google.ProtocolBuffers.Descriptors;
 using Google.ProtocolBuffers.FieldAccess;
