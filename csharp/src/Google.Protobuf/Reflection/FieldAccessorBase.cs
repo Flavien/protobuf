@@ -46,7 +46,7 @@ namespace Google.Protobuf.Reflection
         internal FieldAccessorBase(PropertyInfo property, FieldDescriptor descriptor)
         {
             this.descriptor = descriptor;
-            getValueDelegate = ReflectionUtil.CreateFuncObjectObject(property.GetGetMethod());
+            getValueDelegate = ReflectionUtil.CreateFuncObjectObject(property.GetMethod);
         }
 
         public FieldDescriptor Descriptor { get { return descriptor; } }

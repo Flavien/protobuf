@@ -51,7 +51,7 @@ namespace Google.Protobuf.Reflection
                 throw new ArgumentException("Cannot read from property");
             }
             this.descriptor = descriptor;
-            caseDelegate = ReflectionUtil.CreateFuncObjectT<int>(caseProperty.GetGetMethod());
+            caseDelegate = ReflectionUtil.CreateFuncObjectT<int>(caseProperty.GetMethod);
 
             this.descriptor = descriptor;
             clearDelegate = ReflectionUtil.CreateActionObject(clearMethod);

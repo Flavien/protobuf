@@ -54,7 +54,7 @@ namespace Google.Protobuf.Reflection
             {
                 throw new ArgumentException("Not all required properties/methods available");
             }
-            setValueDelegate = ReflectionUtil.CreateActionObjectObject(property.GetSetMethod());
+            setValueDelegate = ReflectionUtil.CreateActionObjectObject(property.SetMethod);
 
             var clrType = property.PropertyType;
             
@@ -62,7 +62,7 @@ namespace Google.Protobuf.Reflection
 
             // TODO: Validate that this is a reasonable single field? (Should be a value type, a message type, or string/ByteString.)
             object defaultValue =
-                typeof(IMessage).IsAssignableFrom(clrType) ? null
+                typeof(IMessage).GetTypeInfo().IsAssignableFrom(clrType.GetTypeInfo()) ? null
                 : clrType == typeof(string) ? ""
                 : clrType == typeof(ByteString) ? ByteString.Empty
                 : Activator.CreateInstance(clrType);

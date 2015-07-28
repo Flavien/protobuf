@@ -32,6 +32,7 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace Google.Protobuf.Reflection
 {
@@ -307,7 +308,7 @@ namespace Google.Protobuf.Reflection
             {
                 return null;
             }
-            var property = containingType.GeneratedType.GetProperty(propertyName);
+            var property = containingType.GeneratedType.GetTypeInfo().GetDeclaredProperty(propertyName);
             if (property == null)
             {
                 throw new DescriptorValidationException(this, "Property " + propertyName + " not found in " + containingType.GeneratedType);

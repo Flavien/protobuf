@@ -35,6 +35,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Google.Protobuf.Collections
 {
@@ -62,7 +63,7 @@ namespace Google.Protobuf.Collections
         /// Constructs a new map field, defaulting the value nullability to only allow null values for message types
         /// and non-nullable value types.
         /// </summary>
-        public MapField() : this(typeof(IMessage).IsAssignableFrom(typeof(TValue)) || Nullable.GetUnderlyingType(typeof(TValue)) != null)
+        public MapField() : this(typeof(IMessage).GetTypeInfo().IsAssignableFrom(typeof(TValue).GetTypeInfo()) || Nullable.GetUnderlyingType(typeof(TValue)) != null)
         {
         }
 
@@ -74,7 +75,7 @@ namespace Google.Protobuf.Collections
         /// <param name="allowNullValues">Whether null values are permitted in the map or not.</param>
         public MapField(bool allowNullValues)
         {
-            if (allowNullValues && typeof(TValue).IsValueType && Nullable.GetUnderlyingType(typeof(TValue)) == null)
+            if (allowNullValues && typeof(TValue).GetTypeInfo().IsValueType && Nullable.GetUnderlyingType(typeof(TValue)) == null)
             {
                 throw new ArgumentException("allowNullValues", "Non-nullable value types do not support null values");
             }
@@ -85,7 +86,7 @@ namespace Google.Protobuf.Collections
         {
             var clone = new MapField<TKey, TValue>(allowNullValues);
             // Keys are never cloneable. Values might be.
-            if (typeof(IDeepCloneable<TValue>).IsAssignableFrom(typeof(TValue)))
+            if (typeof(IDeepCloneable<TValue>).GetTypeInfo().IsAssignableFrom(typeof(TValue).GetTypeInfo()))
             {
                 foreach (var pair in list)
                 {
@@ -268,7 +269,7 @@ namespace Google.Protobuf.Collections
             frozen = true;
             // Only values can be frozen, as all the key types are simple.
             // Everything can be done in-place, as we're just freezing objects.
-            if (typeof(IFreezable).IsAssignableFrom(typeof(TValue)))
+            if (typeof(IFreezable).GetTypeInfo().IsAssignableFrom(typeof(TValue).GetTypeInfo()))
             {
                 for (var node = list.First; node != null; node = node.Next)
                 {

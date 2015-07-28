@@ -33,6 +33,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 
 namespace Google.Protobuf.Reflection
 {
@@ -86,12 +87,12 @@ namespace Google.Protobuf.Reflection
             {
                 return null;
             }
-            var caseProperty = containingType.GeneratedType.GetProperty(clrName + "Case");
+            var caseProperty = containingType.GeneratedType.GetTypeInfo().GetDeclaredProperty(clrName + "Case");
             if (caseProperty == null)
             {
                 throw new DescriptorValidationException(this, "Property " + clrName + "Case not found in " + containingType.GeneratedType);
             }
-            var clearMethod = containingType.GeneratedType.GetMethod("Clear" + clrName, ReflectionUtil.EmptyTypes);
+            var clearMethod = containingType.GeneratedType.GetTypeInfo().GetDeclaredMethod("Clear" + clrName);
             if (clearMethod == null)
             {
                 throw new DescriptorValidationException(this, "Method Clear" + clrName + " not found in " + containingType.GeneratedType);
